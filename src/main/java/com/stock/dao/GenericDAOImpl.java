@@ -4,6 +4,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import com.stock.model.Base;
+import com.stock.model.Producto;
 import com.stock.singleton.SingletonManFact;
 
 public class GenericDAOImpl<T extends Base> implements GenericDAO<T> {
@@ -171,7 +172,9 @@ public class GenericDAOImpl<T extends Base> implements GenericDAO<T> {
 		
 		try {
 		    // Crear una consulta JPQL para seleccionar todos los elementos de la tabla Item
-		    Query query = em.createQuery("SELECT i FROM " + this.clase.getCanonicalName() + " i");
+			String[] nombre = this.clase.getCanonicalName().split("\\.");
+			//Query query = em.createQuery("SELECT i FROM " + nombre[nombre.length - 1].toLowerCase() + " i");
+			Query query = em.createQuery("SELECT i FROM " + nombre[nombre.length - 1] + " i");
 		    // Ejecutar la consulta y obtener la lista de resultados
 		    objs = query.getResultList();
 

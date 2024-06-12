@@ -52,12 +52,10 @@ public class Pruebas extends HttpServlet {
 		
 		GenericDAO<Producto> prodDAO = new GenericDAOImpl<Producto>(Producto.class);
 		List<Producto> productos = prodDAO.obtenerTodos();
-		System.out.println("Clase obtenida: " + Producto.class.getName().getClass());
-		System.out.println("Clase obtenida: " + Producto.class.getCanonicalName());
-		System.out.println("Clase obtenida: " + Producto.class.getClass());
 		
 		try {
 			System.out.println(productos.get(0).getProducto());
+			System.out.println(productos.get(1).getProducto());
 		} catch (Exception e) {
 			System.out.println("No se pudo imprimir por el error: " + e);
 		} finally {
