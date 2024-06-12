@@ -4,12 +4,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="RECETA")
-public class Receta {
+public class Receta  extends Base{
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="RECETA_ID")
-	private Long id;
+//	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+//	@Column(name="RECETA_ID")
+//	private Long id;
 	
 	@Column(name = "NOMBRE")
 	private String nombre;
@@ -20,7 +19,7 @@ public class Receta {
 	@Column(name = "INSTRUCCIONES")
 	private String instrucciones;
 
-	@Column(name = "USUARIO")
+	@ManyToOne()
 	private Usuario usuario;
 	
 	public Receta(String nombre, String[] ingredientes, String instrucciones) {
@@ -29,12 +28,12 @@ public class Receta {
 		this.instrucciones = instrucciones;
 	}
 	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
+//	public Long getId() {
+//		return id;
+//	}
+//	public void setId(Long id) {
+//		this.id = id;
+//	}
 	
 	public String getNombre() {
 		return nombre;

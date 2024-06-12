@@ -1,5 +1,7 @@
 package com.stock.model;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,15 +11,12 @@ public class MateriaPrima extends Producto {
 	@Column(name = "ALMACENAMIENTO")
 	private String almacenam;
 	
-	/*
-	public MateriaPrima(int codigo, String tipo, int unidades, String almacenamiento, FamProd[] famProd) {
-		this.codigo = codigo;
-		this.tipo = tipo;
-		this.unidades = unidades;
+	//public MateriaPrima(int codigo, String producto, int unidades, List<Item> items, String almacenamiento) {
+	public MateriaPrima(String producto, int unidades, List<Item> items, String almacenamiento) {
+		//super(codigo, producto, unidades, items);
+		super(producto, unidades, items);
 		this.almacenam = almacenamiento;
-		this.famProd = famProd;
 	}
-	*/
 	
 	public String getAlmacenam() {
 		return almacenam;

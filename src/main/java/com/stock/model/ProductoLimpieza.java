@@ -4,16 +4,15 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="PRODUCTO_LIMPIEZA")
-public class ProductoLimpieza {
+public class ProductoLimpieza  extends Base{
 	
 //	@Id
 //	@GeneratedValue(strategy=GenerationType.AUTO)
 //	@Column(name="PRODUCTO_LIMPIEZA_ID")
 //	private Long id;
 	
-	@Id
-	@Column(name = "CODIGO")
-	private int codigo;
+//	@Column(name = "CODIGO")
+//	private int codigo;
 	
 	@Column(name = "PRODUCTO")
 	private String producto;
@@ -28,7 +27,7 @@ public class ProductoLimpieza {
 	private int stock;
 
 	public ProductoLimpieza(int codigo, String producto, int cantidad, int usado, int stock) {
-		this.codigo = codigo;
+		//this.codigo = codigo;
 		this.producto = producto;
 		this.cantidad = cantidad;
 		this.usado = usado;
@@ -42,12 +41,12 @@ public class ProductoLimpieza {
 //		this.id = id;
 //	}
 	
-	public int getCodigo() {
-		return cantidad;
-	}
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
-	}
+//	public int getCodigo() {
+//		return codigo;
+//	}
+//	public void setCodigo(int codigo) {
+//		this.codigo = codigo;
+//	}
 	
 	public String getProducto() {
 		return producto;

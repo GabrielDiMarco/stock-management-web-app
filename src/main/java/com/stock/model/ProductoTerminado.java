@@ -4,9 +4,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="PRODUCTO_TERMINADO")
-public class ProductoTerminado {
+public class ProductoTerminado extends Base {
 
-	@Id
 	@Column(name = "CODIGO")
 	private int codigo;
 	
@@ -19,7 +18,7 @@ public class ProductoTerminado {
 	@Column(name = "COMPONENTES")
 	private Item[] componentes;
 	
-	@Column(name = "USUARIO")
+	@ManyToOne()
 	private Usuario usuario;
 	
 	public ProductoTerminado(int codigo, String producto, int unidades, Item[] componentes) {

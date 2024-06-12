@@ -1,38 +1,17 @@
 package com.stock.dao;
 
-import java.util.List;
+import javax.persistence.*;
+
 import com.stock.model.Usuario;
 
-public class UsuarioDAOImpl implements UsuarioDAO {
-
-	@Override
-	public void guardar(Usuario user) {
-		// TODO Auto-generated method stub
-
+public class UsuarioDAOImpl extends GenericDAOImpl<Usuario> implements UsuarioDAO {
+    
+    public UsuarioDAOImpl(EntityManagerFactory emf) {
+		super(emf);
+		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public void actualizar(Usuario user) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void eliminar(Usuario user) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Usuario obtenerPorId(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Usuario> obtenerTodos() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	public Class<Usuario> getClase() {
+    	return Usuario.class;
+    }
 }

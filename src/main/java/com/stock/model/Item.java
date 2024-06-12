@@ -1,32 +1,52 @@
 package com.stock.model;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name="VENTA")
-public class Item {
+@Table(name="ITEM")
+public class Item extends Base {
 	
-	@Id
-	@Column(name = "CODIGO")
-	private int codigo;
+//	@Column(name = "CODIGO")
+//	private int codigo;
 	
-	@Column(name = "PRODUCTO")
+	@ManyToOne()
 	private Producto producto;
 	
 	@Column(name = "UNIDADES")
 	private int unidades;
 	
-	@Column(name = "FAMILIA_PRODUCTORA")
+	@ManyToOne()
 	private FamProd famProd;
 	
-	@Column(name = "COMPRA")
+	@ManyToOne()
 	private Compra compra;
 	
-	public int getCodigo() {
-		return codigo;
+	@ManyToOne()
+	private Venta venta;
+	
+//	public int getCodigo() {
+//		return codigo;
+//	}
+//	public void setCodigo(int codigo) {
+//		this.codigo = codigo;
+//	}
+	
+	public Item(Producto producto, int unidades, FamProd famProd, Compra compra, Venta venta) {	
+		this.producto = producto;
+		this.unidades = unidades;
+		this.famProd = famProd;
+		this.compra = compra;
+		this.venta = venta;
 	}
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
+	
+	public Item(MateriaPrima producto, int unidades, FamProd famProd, Compra compra, Venta venta) {	
+		this.producto = producto;
+		this.unidades = unidades;
+		this.famProd = famProd;
+		this.compra = compra;
+		this.venta = venta;
 	}
 	
 	public Producto getProducto() {
@@ -55,5 +75,12 @@ public class Item {
 	}
 	public void setCompra(Compra compra) {
 		this.compra = compra;
+	}
+	
+	public Venta getVenta() {
+		return venta;
+	}
+	public void setVenta(Venta venta) {
+		this.venta = venta;
 	}
 }

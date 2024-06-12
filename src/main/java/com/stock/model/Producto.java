@@ -1,14 +1,15 @@
 package com.stock.model;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="PRODUCTO")
-public abstract class Producto {
+public abstract class Producto extends Base{
 	
-	@Id
-	@Column(name = "CODIGO")
-	private int codigo;
+//	@Column(name = "CODIGO")
+//	private int codigo;
 	
 	@Column(name = "PRODUCTO")
 	private String producto;
@@ -16,15 +17,27 @@ public abstract class Producto {
 	@Column(name = "UNIDADES")
 	private int unidades;
 	
-	@Column(name = "ITEMS")
-	private Item[] items;
+	@OneToMany(mappedBy = "producto")
+	private List<Item> items;
 
-	public int getCodigo() {
-		return codigo;
+	public Producto() {
+		
 	}
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
+	
+	//public Producto(int codigo, String producto, int unidades, List<Item> items) {
+	public Producto(String producto, int unidades, List<Item> items) {	
+		//this.codigo = codigo;
+		this.producto = producto;
+		this.unidades = unidades;
+		this.items = items;
 	}
+	
+//	public int getCodigo() {
+//		return codigo;
+//	}
+//	public void setCodigo(int codigo) {
+//		this.codigo = codigo;
+//	}
 	
 	public String getProducto() {
 		return producto;
@@ -40,10 +53,10 @@ public abstract class Producto {
 		this.unidades = unidades;
 	}
 	
-	public Item[] getItems() {
+	public List<Item> getItems() {
 		return items;
 	}
-	public void setItems(Item[] items) {
+	public void setItems(List<Item> items) {
 		this.items = items;
 	}
 }

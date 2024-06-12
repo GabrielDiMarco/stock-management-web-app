@@ -1,18 +1,13 @@
 package com.stock.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
-//import javax.persistence.Column;
-//import javax.persistence.Entity;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.GenerationType;
-//import javax.persistence.Id;
-//import javax.persistence.Table;
 
 @Entity
 @Table(name="USUARIO")
-public class Usuario {
+public class Usuario extends Base {
 
 //	// Hace falta si se tiene el DNI?
 //	@Id
@@ -20,7 +15,6 @@ public class Usuario {
 //	@Column(name="USUARIO_ID")
 //	private Long id;
 	
-	@Id
 	@Column(name = "DNI")
 	private int dni;
 	
@@ -44,6 +38,12 @@ public class Usuario {
 	
 	@Column(name = "ICORPORACION")
 	private Date incorp;
+	
+	@OneToMany(mappedBy = "usuario")
+	private List<ProductoTerminado> prodTermi;
+	
+	@OneToMany(mappedBy = "usuario")
+	private List<Receta> recetas;
 		
 	public Usuario(int dni, String mail, String usuario, String contraseña, String nombre, String apellido, boolean admin) {
 		this.dni = dni;
@@ -80,7 +80,7 @@ public class Usuario {
 	public String getUsuario() {
 		return usuario;
 	}
-	public void setId(String usuario) {
+	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
 	
@@ -117,4 +117,17 @@ public class Usuario {
 		return incorp;
 	}
 
+	public List<ProductoTerminado> getProdTermi() {
+		return prodTermi;
+	}
+	public void setProdTermi(List<ProductoTerminado> prodTermi) {
+		this.prodTermi = prodTermi;
+	}
+	
+	public List<Receta> getRecetas() {
+		return recetas;
+	}
+	public void setRecetas(List<Receta> recetas) {
+		this.recetas = recetas;
+	}
 }

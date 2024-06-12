@@ -1,22 +1,19 @@
 package com.stock.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name="COMPRA")
-public class Compra {
+public class Compra extends Base {
 
-	@Id
-	@Column(name = "CODIGO")
-	private int codigo;
+//	@Column(name = "CODIGO")
+//	private int codigo;
 	
-	@Column(name = "ITEMS")
-	private Item[] items;
-	
-	@Column(name = "UNIDADES")
-	private int[] unidades;
+	@OneToMany(mappedBy = "compra")
+	private List<Item> items;
 	
 	@Column(name = "IMPORTE")
 	private float importe;
@@ -24,25 +21,18 @@ public class Compra {
 	@Column(name = "FECHA")
 	private Date fecha;
 
-	public int getCodigo() {
-		return codigo;
-	}
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
-	}
+//	public int getCodigo() {
+//		return codigo;
+//	}
+//	public void setCodigo(int codigo) {
+//		this.codigo = codigo;
+//	}
 	
-	public Item[] getItems() {
+	public List<Item> getItems() {
 		return items;
 	}
-	public void setItems(Item[] items) {
+	public void setItems(List<Item> items) {
 		this.items = items;
-	}
-	
-	public int[] getUnidades() {
-		return unidades;
-	}
-	public void setUnidades(int[] unidades) {
-		this.unidades = unidades;
 	}
 	
 	public float getImporte() {
