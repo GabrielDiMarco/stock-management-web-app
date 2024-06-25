@@ -3,10 +3,15 @@ package com.stock.dao;
 import java.util.List;
 import javax.persistence.*;
 
+import org.jvnet.hk2.annotations.*;
+
 import com.stock.model.Base;
 import com.stock.model.Producto;
 import com.stock.singleton.SingletonManFact;
 
+import jakarta.inject.Inject;
+
+@Service
 public class GenericDAOImpl<T extends Base> implements GenericDAO<T> {
     
     //public abstract Class<T> getClase();
@@ -84,7 +89,7 @@ public class GenericDAOImpl<T extends Base> implements GenericDAO<T> {
             //em.close();
         }
 	}
-	
+
 	public void eliminarPorId(long objId) {
 		EntityManager em = SingletonManFact.getInstance();
 		EntityTransaction transaction = em.getTransaction();
@@ -161,8 +166,6 @@ public class GenericDAOImpl<T extends Base> implements GenericDAO<T> {
 		return obj;
 	}
 
-	// QUE PONER EN EL QUERY
-	
 	@Override
 	public List<T> obtenerTodos() {
 		// TODO Auto-generated method stub
