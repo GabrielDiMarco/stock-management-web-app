@@ -1,5 +1,5 @@
 package com.stock.dao;
-
+/*
 import java.util.List;
 
 import javax.persistence.*;
@@ -11,4 +11,4 @@ public class CompraDAOImpl extends GenericDAOImpl<Compra> implements CompraDAO {
     public Class<Compra> getClase() {
     	return Compra.class;
     }
-}
+}*/

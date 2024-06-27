@@ -1,5 +1,5 @@
 package com.stock.dao;
-
+/*
 import java.util.List;
 import javax.persistence.*;
 
@@ -11,3 +11,4 @@ public class FamProdDAOImpl extends GenericDAOImpl<FamProd> implements FamProdDA
     	return FamProd.class;
     }
 }
+*/

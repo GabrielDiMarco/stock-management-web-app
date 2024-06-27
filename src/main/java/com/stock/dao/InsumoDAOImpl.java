@@ -1,5 +1,6 @@
 package com.stock.dao;
 
+/*
 import java.util.List;
 import javax.persistence.*;
 
@@ -11,3 +12,4 @@ public class InsumoDAOImpl extends GenericDAOImpl<Insumo> implements InsumoDAO {
     	return Insumo.class;
     }
 }
+*/

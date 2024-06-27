@@ -1,5 +1,5 @@
 package com.stock.dao;
-
+/*
 import java.util.List;
 import javax.persistence.*;
 
@@ -13,3 +13,4 @@ public class ItemDAOImpl extends GenericDAOImpl<Item> implements ItemDAO {
     	return Item.class;
     }
 }
+*/

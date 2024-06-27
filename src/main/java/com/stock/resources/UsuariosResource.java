@@ -2,17 +2,31 @@ package com.stock.resources;
 
 import java.util.List;
 
-import jakarta.inject.Inject;
-import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.*;
+import com.stock.dao.GenericDAOImpl;
+import com.stock.dao.UsuarioDAO;
+import com.stock.dao.UsuarioDAOImpl;
+import com.stock.model.FamProd;
 import com.stock.model.Usuario;
-import com.stock.dao.*;
+
+import jakarta.inject.Inject;
+import jakarta.websocket.server.PathParam;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+
+
 
 @Path("/usuarios")
 public class UsuariosResource {
 	
-	@Inject
-	private UsuarioDAO objdao;
+	//@Inject
+	private UsuarioDAO objdao = new UsuarioDAOImpl(Usuario.class);
 	//private GenericDAO<Usuario> objdao;
 	//private GenericDAO<Usuario> objdao = new GenericDAOImpl<Usuario>(Usuario.class);
 	
@@ -23,8 +37,9 @@ public class UsuariosResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Usuario> obtenerTodos(){
 		//return udao.list();
-		System.out.println(objdao.obtenerTodos().toString());
-		return objdao.obtenerTodos();
+		List<Usuario> lista = objdao.obtenerTodos();
+		System.out.println(lista.toString());
+		return lista;
 	}
 	
 	@Path("/{id}")
@@ -53,7 +68,7 @@ public class UsuariosResource {
 			return Response.status(Response.Status.CONFLICT).build();
 		}
 	}
-	
+	/*
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -79,5 +94,5 @@ public class UsuariosResource {
 			mensaje = "No existe el usuario con ese id";
 			return Response.status(Response.Status.NOT_FOUND).entity(mensaje).build();
 		}
-	}
+	}*/
 }

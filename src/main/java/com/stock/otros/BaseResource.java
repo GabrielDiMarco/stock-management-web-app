@@ -1,4 +1,4 @@
-package com.stock.resources;
+package com.stock.otros;
 
 import java.util.List;
 import jakarta.ws.rs.*;

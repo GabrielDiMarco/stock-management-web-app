@@ -1,5 +1,6 @@
 package com.stock.dao;
 
+/*
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -144,3 +145,4 @@ public class MateriaPrimaDAOImpl implements MateriaPrimaDAO {
 	}
 
 }
+*/
