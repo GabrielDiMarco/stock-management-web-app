@@ -6,4 +6,7 @@ import org.jvnet.hk2.annotations.Service;
 @Service
 public class VentaDAOImpl extends GenericDAOImpl<Venta> implements VentaDAO{
 
+	public VentaDAOImpl() {
+		this.setClase(Venta.class);
+	}
 }
