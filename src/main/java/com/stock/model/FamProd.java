@@ -21,6 +21,8 @@ public class FamProd extends Base {
 	@OneToMany(mappedBy = "famProd")
 	private List<Item> items;
 
+	public FamProd(){}
+	
 	public FamProd(String nombre, String ubicacion) {
 		this.nombre = nombre;
 		this.ubicacion = ubicacion;

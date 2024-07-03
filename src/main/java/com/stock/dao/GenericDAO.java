@@ -2,6 +2,9 @@ package com.stock.dao;
 
 import java.util.List;
 
+import org.glassfish.jersey.spi.Contract;
+
+@Contract
 public interface GenericDAO<T> {
 
     void guardar(T obj);

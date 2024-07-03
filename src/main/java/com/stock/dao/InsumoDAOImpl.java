@@ -1,13 +1,13 @@
 package com.stock.dao;
 
-import java.util.List;
-import javax.persistence.*;
-
 import com.stock.model.Insumo;
 
+import org.jvnet.hk2.annotations.Service;
+
+@Service
 public class InsumoDAOImpl extends GenericDAOImpl<Insumo> implements InsumoDAO {
 
-	public Class<Insumo> getClase() {
-    	return Insumo.class;
-    }
+	public InsumoDAOImpl() {
+		this.setClase(Insumo.class);
+	}
 }

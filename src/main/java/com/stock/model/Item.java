@@ -1,37 +1,33 @@
 package com.stock.model;
 
-import java.util.List;
-
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="ITEM")
 public class Item extends Base {
 	
-//	@Column(name = "CODIGO")
-//	private int codigo;
-	
 	@ManyToOne()
+	@JsonIgnore
 	private Producto producto;
 	
 	@Column(name = "UNIDADES")
 	private int unidades;
 	
 	@ManyToOne()
+	@JsonIgnore
 	private FamProd famProd;
 	
 	@ManyToOne()
+	@JsonIgnore
 	private Compra compra;
 	
 	@ManyToOne()
+	@JsonIgnore
 	private Venta venta;
-	
-//	public int getCodigo() {
-//		return codigo;
-//	}
-//	public void setCodigo(int codigo) {
-//		this.codigo = codigo;
-//	}
+
+	public Item(){}
 	
 	public Item(Producto producto, int unidades, FamProd famProd, Compra compra, Venta venta) {	
 		this.producto = producto;

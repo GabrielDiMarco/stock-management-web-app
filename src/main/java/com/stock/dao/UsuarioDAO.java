@@ -1,7 +1,10 @@
 package com.stock.dao;
 
 import com.stock.model.Usuario;
+import org.jvnet.hk2.annotations.Contract;
 
-public interface UsuarioDAO extends GenericDAO<Usuario> {
-	
+@Contract
+public interface UsuarioDAO extends GenericDAO<Usuario>{
+
+	Usuario obtenerPorNombre(String nombre);
 }

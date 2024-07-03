@@ -2,6 +2,8 @@ package com.stock.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="RECETA")
 public class Receta  extends Base{
@@ -20,7 +22,10 @@ public class Receta  extends Base{
 	private String instrucciones;
 
 	@ManyToOne()
+	@JsonIgnore
 	private Usuario usuario;
+	
+	public Receta(){}
 	
 	public Receta(String nombre, String[] ingredientes, String instrucciones) {
 		this.nombre = nombre;

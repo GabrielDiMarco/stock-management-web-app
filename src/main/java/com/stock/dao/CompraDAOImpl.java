@@ -1,14 +1,13 @@
 package com.stock.dao;
 
-import java.util.List;
-
-import javax.persistence.*;
-
 import com.stock.model.Compra;
 
+import org.jvnet.hk2.annotations.Service;
+
+@Service
 public class CompraDAOImpl extends GenericDAOImpl<Compra> implements CompraDAO {
-    
-    public Class<Compra> getClase() {
-    	return Compra.class;
-    }
+
+	public CompraDAOImpl() {
+		this.setClase(Compra.class);
+	}
 }

@@ -45,6 +45,8 @@ public class Usuario extends Base {
 	@OneToMany(mappedBy = "usuario")
 	private List<Receta> recetas;
 		
+	public Usuario(){}
+	
 	public Usuario(int dni, String mail, String usuario, String contraseña, String nombre, String apellido, boolean admin) {
 		this.dni = dni;
 		this.mail = mail;

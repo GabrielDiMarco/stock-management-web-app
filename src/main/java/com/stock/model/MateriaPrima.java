@@ -11,9 +11,7 @@ public class MateriaPrima extends Producto {
 	@Column(name = "ALMACENAMIENTO")
 	private String almacenam;
 	
-	public MateriaPrima() {
-		
-	}
+	public MateriaPrima() {}
 	
 	//public MateriaPrima(int codigo, String producto, int unidades, List<Item> items, String almacenamiento) {
 	public MateriaPrima(String producto, int unidades, List<Item> items, String almacenamiento) {

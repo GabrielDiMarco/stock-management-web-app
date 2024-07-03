@@ -21,6 +21,8 @@ public class ProductoTerminado extends Base {
 	@ManyToOne()
 	private Usuario usuario;
 	
+	public ProductoTerminado(){}
+	
 	public ProductoTerminado(int codigo, String producto, int unidades, Item[] componentes) {
 		this.codigo = codigo;
 		this.producto = producto;
