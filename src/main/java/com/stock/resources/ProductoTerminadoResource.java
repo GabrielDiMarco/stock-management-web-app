@@ -1,21 +1,26 @@
-package com.stock.otros;
+package com.stock.resources;
 
 import java.util.List;
+
+import com.stock.dao.*;
+import com.stock.model.*;
+
+import jakarta.inject.Inject;
+import jakarta.websocket.server.PathParam;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
-import com.stock.model.Producto;
-import com.stock.dao.*;
 
-@Path("/producto")
-public class ProductoResource {
+@Path("/producto-terminado")
+public class ProductoTerminadoResource {
 
-	private GenericDAO<Producto> objdao = new GenericDAOImpl<Producto>(Producto.class);
-	//private GenericDAO udao = FactoryDAO.getUsuarioDAO();
+	@Inject
+	private ProductoTerminadoDAO objdao;
+	
 	private String mensaje;
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Producto> obtenerTodos(){
+	public List<ProductoTerminado> obtenerTodos(){
 		//return udao.list();
 		return objdao.obtenerTodos();
 	}
@@ -25,7 +30,7 @@ public class ProductoResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response obtenerPorId(@PathParam("id") Integer id) {
 		//Usuario u = udao.read(id);
-		Producto obj = objdao.obtenerPorId(id);
+		ProductoTerminado obj = objdao.obtenerPorId(id);
 		if (obj != null){
 			return Response.ok().entity(obj).build();
 		} else {
@@ -37,23 +42,24 @@ public class ProductoResource {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response guardar(Producto obj) {
-		// El if coprueba si el id del usuario que se intenta crear está repetido
-		if(objdao.obtenerPorId(obj.getId()) == null){
+	public Response guardar(ProductoTerminado obj) {
+		try {
 			objdao.guardar(obj);
-			return Response.status(Response.Status.CREATED).build();
-		} else {
-			return Response.status(Response.Status.CONFLICT).build();
+			return Response.ok().build();
+			//return Response.status(Response.Status.CREATED).build();
+		} catch (Exception e) {
+		    e.printStackTrace();
+		    return Response.serverError().build();
 		}
 	}
 	
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response editar(@PathParam("id") Integer id, Producto obj){
-		Producto aux = objdao.obtenerPorId(id);
+	public Response editar(ProductoTerminado obj){
+		ProductoTerminado aux = objdao.obtenerPorId(obj.getId());
 		if (aux != null){
-			objdao.actualizar(obj);
+			objdao.actualizar(obj);;
 			return Response.ok().entity(obj).build();
 		} else {
 			return Response.status(Response.Status.NOT_FOUND).entity("[]").build();
@@ -64,7 +70,7 @@ public class ProductoResource {
 	@Path("/{id}")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response borrar(@PathParam("id") Integer id) {
-		Producto aux = objdao.obtenerPorId(id);
+		ProductoTerminado aux = objdao.obtenerPorId(id);
 		if (aux != null) {
 			objdao.eliminar(aux);
 			return Response.noContent().build();

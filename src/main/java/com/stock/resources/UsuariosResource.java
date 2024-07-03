@@ -2,50 +2,37 @@ package com.stock.resources;
 
 import java.util.List;
 
-import com.stock.dao.GenericDAOImpl;
-import com.stock.dao.UsuarioDAO;
-import com.stock.dao.UsuarioDAOImpl;
-import com.stock.model.FamProd;
-import com.stock.model.Usuario;
+import com.stock.dao.*;
+import com.stock.model.*;
 
 import jakarta.inject.Inject;
-import jakarta.websocket.server.PathParam;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.DELETE;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.PUT;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
+//import jakarta.websocket.server.PathParam;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.*;
 
 
-
-@Path("/usuarios")
+@Path("/usuario")
 public class UsuariosResource {
 	
-	//@Inject
-	private UsuarioDAO objdao = new UsuarioDAOImpl(Usuario.class);
-	//private GenericDAO<Usuario> objdao;
-	//private GenericDAO<Usuario> objdao = new GenericDAOImpl<Usuario>(Usuario.class);
+	@Inject
+	private UsuarioDAO objdao;
 	
-	//private GenericDAO udao = FactoryDAO.getUsuarioDAO();
 	private String mensaje;
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Usuario> obtenerTodos(){
-		//return udao.list();
+
 		List<Usuario> lista = objdao.obtenerTodos();
 		System.out.println(lista.toString());
 		return lista;
 	}
 	
-	@Path("/{id}")
 	@GET
+	@Path("{id}")
+	//@Path("user")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response obtenerPorId(@PathParam("id") Integer id) {
+	public Response obtenerPorId(@PathParam("id") Long id) {
 		//Usuario u = udao.read(id);
 		Usuario obj = objdao.obtenerPorId(id);
 		if (obj != null){
@@ -60,20 +47,21 @@ public class UsuariosResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response guardar(Usuario obj) {
-		// El if coprueba si el id del usuario que se intenta crear está repetido
-		if(objdao.obtenerPorId(obj.getId()) == null){
+		try {
 			objdao.guardar(obj);
-			return Response.status(Response.Status.CREATED).build();
-		} else {
-			return Response.status(Response.Status.CONFLICT).build();
+			return Response.ok().build();
+			//return Response.status(Response.Status.CREATED).build();
+		} catch (Exception e) {
+		    e.printStackTrace();
+		    return Response.serverError().build();
 		}
 	}
-	/*
+	
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response editar(@PathParam("id") Integer id, Usuario obj){
-		Usuario aux = objdao.obtenerPorId(id);
+	public Response editar(Usuario obj){
+		Usuario aux = objdao.obtenerPorId(obj.getId());
 		if (aux != null){
 			objdao.actualizar(obj);;
 			return Response.ok().entity(obj).build();
@@ -82,8 +70,9 @@ public class UsuariosResource {
 		}
 	}
 	
+	// NO ELIMINAR, USAR BORRADO LOGICO (VARIABLE QUE ANULA LA VALIDEZ DEL ELEMENTO)
+	@Path("{id}")
 	@DELETE
-	@Path("/{id}")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response borrar(@PathParam("id") Integer id) {
 		Usuario aux = objdao.obtenerPorId(id);
@@ -94,5 +83,5 @@ public class UsuariosResource {
 			mensaje = "No existe el usuario con ese id";
 			return Response.status(Response.Status.NOT_FOUND).entity(mensaje).build();
 		}
-	}*/
+	}
 }

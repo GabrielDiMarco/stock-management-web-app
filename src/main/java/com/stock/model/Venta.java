@@ -24,6 +24,8 @@ public class Venta  extends Base{
 	@Column(name = "FECHA")
 	private Date fecha;
 
+	public Venta(){}
+	
 //	public int getCodigo() {
 //		return codigo;
 //	}

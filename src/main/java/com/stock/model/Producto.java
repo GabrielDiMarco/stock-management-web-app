@@ -4,13 +4,12 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="PRODUCTO")
 public abstract class Producto extends Base{
-	
-//	@Column(name = "CODIGO")
-//	private int codigo;
-	
+
 	@Column(name = "PRODUCTO")
 	private String producto;
 	
@@ -18,26 +17,17 @@ public abstract class Producto extends Base{
 	private int unidades;
 	
 	@OneToMany(mappedBy = "producto")
+	@JsonIgnore
 	private List<Item> items;
 
-	public Producto() {
-		
-	}
+	public Producto() {}
 	
-	//public Producto(int codigo, String producto, int unidades, List<Item> items) {
 	public Producto(String producto, int unidades, List<Item> items) {	
 		//this.codigo = codigo;
 		this.producto = producto;
 		this.unidades = unidades;
 		this.items = items;
 	}
-	
-//	public int getCodigo() {
-//		return codigo;
-//	}
-//	public void setCodigo(int codigo) {
-//		this.codigo = codigo;
-//	}
 	
 	public String getProducto() {
 		return producto;

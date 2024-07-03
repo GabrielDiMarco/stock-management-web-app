@@ -1,18 +1,20 @@
-package com.stock.otros;
+package com.stock.resources;
 
 import java.util.List;
 
-import com.stock.dao.GenericDAO;
-import com.stock.dao.GenericDAOImpl;
-import com.stock.model.Compra;
+import com.stock.dao.*;
+import com.stock.model.*;
 
+import jakarta.inject.Inject;
+import jakarta.websocket.server.PathParam;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
 
 @Path("/compra")
 public class CompraResource {
 	
-	private GenericDAO<Compra> objdao = new GenericDAOImpl<Compra>(Compra.class);
+	@Inject
+	private CompraDAO objdao;
 	//private GenericDAO udao = FactoryDAO.getUsuarioDAO();
 	private String mensaje;
 	
@@ -41,20 +43,21 @@ public class CompraResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response guardar(Compra obj) {
-		// El if coprueba si el id del usuario que se intenta crear está repetido
-		if(objdao.obtenerPorId(obj.getId()) == null){
+		try {
 			objdao.guardar(obj);
-			return Response.status(Response.Status.CREATED).build();
-		} else {
-			return Response.status(Response.Status.CONFLICT).build();
+			return Response.ok().build();
+			//return Response.status(Response.Status.CREATED).build();
+		} catch (Exception e) {
+		    e.printStackTrace();
+		    return Response.serverError().build();
 		}
 	}
 	
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response editar(@PathParam("id") Integer id, Compra obj){
-		Compra aux = objdao.obtenerPorId(id);
+	public Response editar(Compra obj){
+		Compra aux = objdao.obtenerPorId(obj.getId());
 		if (aux != null){
 			objdao.actualizar(obj);
 			return Response.ok().entity(obj).build();

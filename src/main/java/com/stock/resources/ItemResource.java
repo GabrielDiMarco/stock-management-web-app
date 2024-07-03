@@ -1,21 +1,26 @@
-package com.stock.otros;
+package com.stock.resources;
 
 import java.util.List;
+
+import com.stock.dao.*;
+import com.stock.model.*;
+
+import jakarta.inject.Inject;
+import jakarta.websocket.server.PathParam;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
-import com.stock.model.ProductoLimpieza;
-import com.stock.dao.*;
 
-@Path("/producto-limpieza")
-public class ProductoLimpiezaResource {
+@Path("/item")
+public class ItemResource {
 
-	private GenericDAO<ProductoLimpieza> objdao = new GenericDAOImpl<ProductoLimpieza>(ProductoLimpieza.class);
-	//private GenericDAO udao = FactoryDAO.getUsuarioDAO();
+	@Inject
+	private ItemDAO objdao;
+	
 	private String mensaje;
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<ProductoLimpieza> obtenerTodos(){
+	public List<Item> obtenerTodos(){
 		//return udao.list();
 		return objdao.obtenerTodos();
 	}
@@ -25,7 +30,7 @@ public class ProductoLimpiezaResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response obtenerPorId(@PathParam("id") Integer id) {
 		//Usuario u = udao.read(id);
-		ProductoLimpieza obj = objdao.obtenerPorId(id);
+		Item obj = objdao.obtenerPorId(id);
 		if (obj != null){
 			return Response.ok().entity(obj).build();
 		} else {
@@ -37,21 +42,22 @@ public class ProductoLimpiezaResource {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response guardar(ProductoLimpieza obj) {
-		// El if coprueba si el id del usuario que se intenta crear está repetido
-		if(objdao.obtenerPorId(obj.getId()) == null){
+	public Response guardar(Item obj) {
+		try {
 			objdao.guardar(obj);
-			return Response.status(Response.Status.CREATED).build();
-		} else {
-			return Response.status(Response.Status.CONFLICT).build();
+			return Response.ok().build();
+			//return Response.status(Response.Status.CREATED).build();
+		} catch (Exception e) {
+		    e.printStackTrace();
+		    return Response.serverError().build();
 		}
 	}
 	
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response editar(@PathParam("id") Integer id, ProductoLimpieza obj){
-		ProductoLimpieza aux = objdao.obtenerPorId(id);
+	public Response editar(Item obj){
+		Item aux = objdao.obtenerPorId(obj.getId());
 		if (aux != null){
 			objdao.actualizar(obj);
 			return Response.ok().entity(obj).build();
@@ -64,7 +70,7 @@ public class ProductoLimpiezaResource {
 	@Path("/{id}")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response borrar(@PathParam("id") Integer id) {
-		ProductoLimpieza aux = objdao.obtenerPorId(id);
+		Item aux = objdao.obtenerPorId(id);
 		if (aux != null) {
 			objdao.eliminar(aux);
 			return Response.noContent().build();

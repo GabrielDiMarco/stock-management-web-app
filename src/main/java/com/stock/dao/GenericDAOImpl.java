@@ -1,5 +1,7 @@
 package com.stock.dao;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.List;
 import javax.persistence.*;
 
@@ -16,9 +18,19 @@ public class GenericDAOImpl<T extends Base> implements GenericDAO<T> {
     
     //public abstract Class<T> getClase();
 	private Class<T> clase;
+	private Object type;
 	
-	public GenericDAOImpl(Class<T> clase) {
+	public Class<T> getClase() {
+		return clase;
+	}
+	
+	public void setClase(Class <T> clase) {
 		this.clase = clase;
+	}
+	
+	public GenericDAOImpl() {
+		Type superClass = getClass().getGenericSuperclass();
+        this.type = ((ParameterizedType) superClass).getActualTypeArguments()[0];
 	}
     
 	@Override
@@ -71,7 +83,7 @@ public class GenericDAOImpl<T extends Base> implements GenericDAO<T> {
         try {
             transaction.begin();
             // Se supone que esto busca en la base de datos?
-            T objElim = em.find(this.clase, obj.getId());
+            T objElim = em.find(this.getClase(), obj.getId());
             
             if (objElim != null) {
                 // Eliminar el objeto de la base de datos
@@ -125,7 +137,9 @@ public class GenericDAOImpl<T extends Base> implements GenericDAO<T> {
 		T obj = null;
 		
 		try {
-			obj = em.find(this.clase, objId);
+			Class<? extends GenericDAOImpl> claseAux = this.getClass();
+			Class<? extends Base> claseAux2 = this.obtenerTodos().get(0).getClass();
+			obj = em.find(this.getClase(), objId);
 			
 			if (obj == null) {
 		        System.out.println("No se encontró ningún elemento con el ID " + objId);
@@ -175,7 +189,7 @@ public class GenericDAOImpl<T extends Base> implements GenericDAO<T> {
 		
 		try {
 		    // Crear una consulta JPQL para seleccionar todos los elementos de la tabla Item
-			String[] nombre = this.clase.getCanonicalName().split("\\.");
+			String[] nombre = this.type.toString().split("\\.");
 			//Query query = em.createQuery("SELECT i FROM " + nombre[nombre.length - 1].toLowerCase() + " i");
 			Query query = em.createQuery("SELECT i FROM " + nombre[nombre.length - 1] + " i");
 		    // Ejecutar la consulta y obtener la lista de resultados

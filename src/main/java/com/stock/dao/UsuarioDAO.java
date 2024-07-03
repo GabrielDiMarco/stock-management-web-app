@@ -1,26 +1,10 @@
 package com.stock.dao;
 
-import java.util.List;
-
-import org.glassfish.jersey.spi.Contract;
-
 import com.stock.model.Usuario;
+import org.jvnet.hk2.annotations.Contract;
 
 @Contract
-public interface UsuarioDAO {
+public interface UsuarioDAO extends GenericDAO<Usuario>{
 
-    void guardar(Usuario obj);
-
-    void actualizar(Usuario obj);
-
-    void eliminar(Usuario obj);
-
-    void eliminarPorId(long objId);
-    
-    Usuario obtenerPorId(long objId);
-    
-    Usuario obtenerPorNombre(String nombre);
-    
-    List<Usuario> obtenerTodos();
-    
+	Usuario obtenerPorNombre(String nombre);
 }

@@ -26,6 +26,8 @@ public class ProductoLimpieza  extends Base{
 	@Column(name = "STOCK")
 	private int stock;
 
+	public ProductoLimpieza(){}
+	
 	public ProductoLimpieza(int codigo, String producto, int cantidad, int usado, int stock) {
 		//this.codigo = codigo;
 		this.producto = producto;

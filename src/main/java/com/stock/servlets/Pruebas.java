@@ -31,7 +31,7 @@ public class Pruebas extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		// Agrega elemento a la BD ----------------------------------------------------------------------------------------------------
-		
+		/*
 		//GenericDAO<Insumo> insumoDAO = new GenericDAOImpl<Insumo>(Insumo.class);
 		//GenericDAO<Insumo> insumoDAO = new GenericDAOImpl<Insumo>(Insumo.class);
 		//Insumo insumo = new Insumo(1, "Frasco 500ml", 100, new ArrayList<Item>(), "Recipiente");
@@ -41,7 +41,7 @@ public class Pruebas extends HttpServlet {
 		Usuario user = new Usuario(41000000, "algo@algo.com", "juanUser", "juanPass", "Juan", "Diaz", false);
 		UsuarioDAO userDAO = new UsuarioDAOImpl(Usuario.class);
 		userDAO.guardar(user);
-		
+		*/
 		// ----------------------------------------------------------------------------------------------------------------------------
 		
 		// Eliminar elemento de la BD con ID 1 ----------------------------------------------------------------------------------------
@@ -54,12 +54,11 @@ public class Pruebas extends HttpServlet {
 		
 		// Se obtienen Objetos Producto de la lista obtenerTodos() ------------------------------------------------------------------------
 		/*
-		GenericDAO<Producto> prodDAO = new GenericDAOImpl<Producto>(Producto.class);
-		List<Producto> productos = prodDAO.obtenerTodos();
+		GenericDAO<Usuario> prodDAO = new GenericDAOImpl<Usuario>(Usuario.class);
+		List<Usuario> productos = prodDAO.obtenerTodos();
 		
 		try {
-			System.out.println(productos.get(0).getProducto());
-			System.out.println(productos.get(1).getProducto());
+			System.out.println(productos.get(0));
 		} catch (Exception e) {
 			System.out.println("No se pudo imprimir por el error: " + e);
 		} finally {

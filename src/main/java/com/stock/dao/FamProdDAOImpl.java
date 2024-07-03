@@ -1,14 +1,14 @@
 package com.stock.dao;
-/*
-import java.util.List;
-import javax.persistence.*;
 
 import com.stock.model.FamProd;
 
+import org.jvnet.hk2.annotations.Service;
+
+@Service
 public class FamProdDAOImpl extends GenericDAOImpl<FamProd> implements FamProdDAO {
 
-	public Class<FamProd> getClase() {
-    	return FamProd.class;
-    }
+	public FamProdDAOImpl() {
+		this.setClase(FamProd.class);
+	}
 }
-*/
+

@@ -1,31 +1,37 @@
-package com.stock.otros;
+package com.stock.resources;
 
 import java.util.List;
+
+import com.stock.dao.*;
+import com.stock.model.*;
+
+import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
-import com.stock.model.Base;
-import com.stock.dao.*;
 
-@Path("/base")
-public class BaseResource {
+@Path("/materia-prima")
+public class MateriaPrimaResource {
+
+	@Inject
+	private MateriaPrimaDAO objdao;
 	
-	private GenericDAO<Base> objdao = new GenericDAOImpl<Base>(Base.class);
-	//private GenericDAO udao = FactoryDAO.getUsuarioDAO();
 	private String mensaje;
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Base> obtenerTodos(){
-		//return udao.list();
-		return objdao.obtenerTodos();
+	public List<MateriaPrima> obtenerTodos(){
+		
+		List<MateriaPrima> lista = objdao.obtenerTodos();
+		System.out.println(lista.toString());
+		return lista;
 	}
 	
-	@Path("/{id}")
+	@Path("{id}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response obtenerPorId(@PathParam("id") Integer id) {
 		//Usuario u = udao.read(id);
-		Base obj = objdao.obtenerPorId(id);
+		MateriaPrima obj = objdao.obtenerPorId(id);
 		if (obj != null){
 			return Response.ok().entity(obj).build();
 		} else {
@@ -37,21 +43,22 @@ public class BaseResource {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response guardar(Base obj) {
-		// El if coprueba si el id del usuario que se intenta crear está repetido
-		if(objdao.obtenerPorId(obj.getId()) == null){
+	public Response guardar(MateriaPrima obj) {
+		try {
 			objdao.guardar(obj);
-			return Response.status(Response.Status.CREATED).build();
-		} else {
-			return Response.status(Response.Status.CONFLICT).build();
+			return Response.ok().build();
+			//return Response.status(Response.Status.CREATED).build();
+		} catch (Exception e) {
+		    e.printStackTrace();
+		    return Response.serverError().build();
 		}
 	}
 	
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response editar(@PathParam("id") Integer id, Base obj){
-		Base aux = objdao.obtenerPorId(id);
+	public Response editar(MateriaPrima obj){
+		MateriaPrima aux = objdao.obtenerPorId(obj.getId());
 		if (aux != null){
 			objdao.actualizar(obj);
 			return Response.ok().entity(obj).build();
@@ -61,10 +68,10 @@ public class BaseResource {
 	}
 	
 	@DELETE
-	@Path("/{id}")
+	@Path("{id}")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response borrar(@PathParam("id") Integer id) {
-		Base aux = objdao.obtenerPorId(id);
+		MateriaPrima aux = objdao.obtenerPorId(id);
 		if (aux != null) {
 			objdao.eliminar(aux);
 			return Response.noContent().build();

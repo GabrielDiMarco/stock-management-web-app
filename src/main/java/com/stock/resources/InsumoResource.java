@@ -1,21 +1,26 @@
-package com.stock.otros;
+package com.stock.resources;
 
 import java.util.List;
+
+import com.stock.dao.*;
+import com.stock.model.*;
+
+import jakarta.inject.Inject;
+import jakarta.websocket.server.PathParam;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
-import com.stock.model.FamProd;
-import com.stock.dao.*;
 
-@Path("/fam-prod")
-public class FamProdResource {
+@Path("/insumo")
+public class InsumoResource {
+	
+	@Inject
+	private InsumoDAO objdao;
 
-	private GenericDAO<FamProd> objdao = new GenericDAOImpl<FamProd>(FamProd.class);
-	//private GenericDAO udao = FactoryDAO.getUsuarioDAO();
 	private String mensaje;
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<FamProd> obtenerTodos(){
+	public List<Insumo> obtenerTodos(){
 		//return udao.list();
 		return objdao.obtenerTodos();
 	}
@@ -25,7 +30,7 @@ public class FamProdResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response obtenerPorId(@PathParam("id") Integer id) {
 		//Usuario u = udao.read(id);
-		FamProd obj = objdao.obtenerPorId(id);
+		Insumo obj = objdao.obtenerPorId(id);
 		if (obj != null){
 			return Response.ok().entity(obj).build();
 		} else {
@@ -37,21 +42,21 @@ public class FamProdResource {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response guardar(FamProd obj) {
-		// El if coprueba si el id del usuario que se intenta crear está repetido
-		if(objdao.obtenerPorId(obj.getId()) == null){
+	public Response guardar(Insumo obj) {
+		try {
 			objdao.guardar(obj);
-			return Response.status(Response.Status.CREATED).build();
-		} else {
-			return Response.status(Response.Status.CONFLICT).build();
+			return Response.ok().build();
+		} catch (Exception e) {
+		    e.printStackTrace();
+		    return Response.serverError().build();
 		}
 	}
 	
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response editar(@PathParam("id") Integer id, FamProd obj){
-		FamProd aux = objdao.obtenerPorId(id);
+	public Response editar(Insumo obj){
+		Insumo aux = objdao.obtenerPorId(obj.getId());
 		if (aux != null){
 			objdao.actualizar(obj);
 			return Response.ok().entity(obj).build();
@@ -64,7 +69,7 @@ public class FamProdResource {
 	@Path("/{id}")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response borrar(@PathParam("id") Integer id) {
-		FamProd aux = objdao.obtenerPorId(id);
+		Insumo aux = objdao.obtenerPorId(id);
 		if (aux != null) {
 			objdao.eliminar(aux);
 			return Response.noContent().build();
