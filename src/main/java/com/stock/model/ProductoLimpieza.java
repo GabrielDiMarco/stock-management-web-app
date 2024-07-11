@@ -6,14 +6,6 @@ import javax.persistence.*;
 @Table(name="PRODUCTO_LIMPIEZA")
 public class ProductoLimpieza  extends Base{
 	
-//	@Id
-//	@GeneratedValue(strategy=GenerationType.AUTO)
-//	@Column(name="PRODUCTO_LIMPIEZA_ID")
-//	private Long id;
-	
-//	@Column(name = "CODIGO")
-//	private int codigo;
-	
 	@Column(name = "PRODUCTO")
 	private String producto;
 	

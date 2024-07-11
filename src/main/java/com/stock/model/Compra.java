@@ -5,14 +5,14 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="COMPRA")
 public class Compra extends Base {
 
-//	@Column(name = "CODIGO")
-//	private int codigo;
-	
 	@OneToMany(mappedBy = "compra")
+	@JsonIgnore
 	private List<Item> items;
 	
 	@Column(name = "IMPORTE")
@@ -21,12 +21,7 @@ public class Compra extends Base {
 	@Column(name = "FECHA")
 	private Date fecha;
 
-//	public int getCodigo() {
-//		return codigo;
-//	}
-//	public void setCodigo(int codigo) {
-//		this.codigo = codigo;
-//	}
+	public Compra() {}
 	
 	public List<Item> getItems() {
 		return items;
