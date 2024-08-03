@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="FAMILIA_PRODUCTORA")
 public class FamProd extends Base {
@@ -19,6 +21,7 @@ public class FamProd extends Base {
 	private String ubicacion;
 	
 	@OneToMany(mappedBy = "famProd")
+	@JsonIgnoreProperties(ignoreUnknown = true)
 	private List<Item> items;
 
 	public FamProd(){}

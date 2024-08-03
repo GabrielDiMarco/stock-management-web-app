@@ -38,4 +38,9 @@ public class UsuarioDAOImpl extends GenericDAOImpl<Usuario> implements UsuarioDA
 		}
 		return obj;
 	}
+	
+	//static?
+	public boolean validar(String user, String password) {
+		return (user.equals("admin") && password.equals("admin"));
+	}
 }

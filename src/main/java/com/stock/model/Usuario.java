@@ -1,20 +1,18 @@
 package com.stock.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+//@JsonIgnoreProperties
 @Table(name="USUARIO")
 public class Usuario extends Base {
 
-//	// Hace falta si se tiene el DNI?
-//	@Id
-//	@GeneratedValue(strategy=GenerationType.AUTO)
-//	@Column(name="USUARIO_ID")
-//	private Long id;
-	
 	@Column(name = "DNI")
 	private int dni;
 	
@@ -40,9 +38,11 @@ public class Usuario extends Base {
 	private Date incorp;
 	
 	@OneToMany(mappedBy = "usuario")
+	//@JsonIgnoreProperties(ignoreUnknown = true)
 	private List<ProductoTerminado> prodTermi;
 	
 	@OneToMany(mappedBy = "usuario")
+	//@JsonIgnoreProperties(ignoreUnknown = true)
 	private List<Receta> recetas;
 		
 	public Usuario(){}
@@ -52,10 +52,14 @@ public class Usuario extends Base {
 		this.mail = mail;
 		this.usuario = usuario;
 		this.contraseña = contraseña;
+		//this.contrasenia = contraseña;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.admin = admin;
 		this.incorp = new Date();
+		this.prodTermi = new ArrayList<>();
+		this.recetas = new ArrayList<>();
+		//this.valid = true;
 	}
 	
 //	public Long getId() {
