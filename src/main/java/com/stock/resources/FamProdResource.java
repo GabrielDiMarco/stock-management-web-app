@@ -42,6 +42,7 @@ public class FamProdResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response guardar(FamProd obj) {
+		System.out.print(obj);
 		try {
 			objdao.guardar(obj);
 			return Response.ok().build();

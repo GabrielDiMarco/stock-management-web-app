@@ -45,6 +45,8 @@ public class LoginServicio {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response validar(Usuario usuario) {
+		// El mensaje no incluye el atributo valid del usuario, por lo que siempre llegará como false y dará un Bad Request
+		// && usuario.getValid()
 		if(usuario != null && usuario.getUsuario() != null && usuario.getContraseña() != null) {
 			boolean status = userdao.validar(usuario.getUsuario(), usuario.getContraseña());
 			//SignatureAlgorithm signAlg = SignatureAlgorithm.HS256;

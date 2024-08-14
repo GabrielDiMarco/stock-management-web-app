@@ -16,12 +16,20 @@ public abstract class Base {
 	@ColumnDefault("1")
 	boolean valid;
 	
+	public Long getId() {
+		return id;
+	}
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
 	
-	public Long getId() {
-		return id;
+	public boolean getValid() {
+		return valid;
+	}
+	
+	public void setValid(boolean valid) {
+		this.valid = valid;
 	}
 	
 	public Base(){}

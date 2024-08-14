@@ -20,6 +20,15 @@
 	</servlet-mapping>
 
 	<filter>
+		<filter-name>Filtro</filter-name>
+		<filter-class>com.stock.resources.Filtro</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>Filtro</filter-name>
+		<url-pattern>/rest/*</url-pattern>
+	</filter-mapping>
+
+	<!-- filter>
 		<filter-name>CorsFilter</filter-name>
 		<filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
 		<init-param>
@@ -50,7 +59,8 @@
 	<filter-mapping>
 		<filter-name>CorsFilter</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+	</filter-mapping -->
+	
 		<!-- servlet> <servlet-name>OpenApi</servlet-name> <servlet-class>io.swagger.v3.jaxrs2.integration.OpenApiServlet</servlet-class> 
 			<init-param> <param-name>openApi.configuration.resourcePackages</param-name> 
 			<param-value>com.stock.resources</param-value> </init-param> <load-on-startup>2</load-on-startup> 

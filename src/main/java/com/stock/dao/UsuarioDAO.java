@@ -8,6 +8,7 @@ public interface UsuarioDAO extends GenericDAO<Usuario>{
 
 	Usuario obtenerPorNombre(String nombre);
 	
-	// No lo puedo poner acá si tiene static en Impl
+	Usuario obtenerPorUsuario(String user);
+	
 	boolean validar(String user, String password);
 }

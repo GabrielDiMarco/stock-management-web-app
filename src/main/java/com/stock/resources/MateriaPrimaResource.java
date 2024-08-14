@@ -44,6 +44,7 @@ public class MateriaPrimaResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response guardar(MateriaPrima obj) {
+		System.out.print(obj);
 		try {
 			objdao.guardar(obj);
 			return Response.ok().build();

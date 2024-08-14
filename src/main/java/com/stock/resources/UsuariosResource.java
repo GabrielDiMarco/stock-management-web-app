@@ -63,7 +63,7 @@ public class UsuariosResource {
 	public Response editar(Usuario obj){
 		Usuario aux = objdao.obtenerPorId(obj.getId());
 		if (aux != null){
-			objdao.actualizar(obj);;
+			objdao.actualizar(obj);
 			return Response.ok().entity(obj).build();
 		} else {
 			return Response.status(Response.Status.NOT_FOUND).entity("[]").build();

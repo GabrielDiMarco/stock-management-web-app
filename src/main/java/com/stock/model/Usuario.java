@@ -6,8 +6,10 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@Cacheable(false)
 @Entity
 //@JsonIgnoreProperties
 @Table(name="USUARIO")
@@ -35,6 +37,7 @@ public class Usuario extends Base {
 	private String apellido;
 	
 	@Column(name = "ICORPORACION")
+	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date incorp;
 	
 	@OneToMany(mappedBy = "usuario")
@@ -61,13 +64,6 @@ public class Usuario extends Base {
 		this.recetas = new ArrayList<>();
 		//this.valid = true;
 	}
-	
-//	public Long getId() {
-//		return id;
-//	}
-//	public void setId(Long id) {
-//		this.id = id;
-//	}
 	
 	public int getDni() {
 		return dni;
@@ -121,6 +117,9 @@ public class Usuario extends Base {
 	// La fecha de incorporación no tiene "set", no se puede modificar
 	public Date getIncorp() {
 		return incorp;
+	}
+	public void setIncorp(Date incorp) {
+		this.incorp = incorp;
 	}
 
 	public List<ProductoTerminado> getProdTermi() {

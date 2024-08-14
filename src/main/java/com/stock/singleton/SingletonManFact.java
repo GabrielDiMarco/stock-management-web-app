@@ -17,7 +17,6 @@ public class SingletonManFact {
             emf = Persistence.createEntityManagerFactory("miUP");
             em = emf.createEntityManager();
         }
-        
         return em;
     }
     
