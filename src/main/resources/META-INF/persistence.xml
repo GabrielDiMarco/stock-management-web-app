@@ -9,7 +9,7 @@
     <properties>
     	<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
     	
-    	<property name="javax.persistence.jdbc.url" value="jdbc:mysql://java-db:3306/jyaa2024_bd3"/>
+    	<property name="javax.persistence.jdbc.url" value="jdbc:mysql://java-db:3306/jyaa2024_grupo3"/>
 		<property name="javax.persistence.jdbc.user" value="jyaa2024_usr3"/>
 		<property name="javax.persistence.jdbc.password" value="jyaa2024_pwd3"/>
 		
