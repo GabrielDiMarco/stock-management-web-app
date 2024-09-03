@@ -30,8 +30,8 @@
         <property name="hibernate.connection.username" value="jyaa2024_usr1"/>
         <property name="hibernate.connection.password" value="jyaa2024_pwd1"/>
          
-        <property name="hibernate.default_schema" value="stock"/>
-        <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/-->
+        <property name="hibernate.default_schema" value="stock"/-->
+        <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
     </properties>
   </persistence-unit>
 </persistence>
